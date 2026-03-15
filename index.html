@@ -15,14 +15,10 @@
     <style>
         /* COLOR PALETTES & VARIABLES */
         :root {
-            --color-1: #88AB8E;
-            /* Hijau Tua */
-            --color-2: #AFC8AD;
-            /* Hijau Muda */
-            --color-3: #EEE7DA;
-            /* Krem Gelap */
-            --color-4: #F2F1EB;
-            /* Krem Terang (Background Utama) */
+            --color-1: #88AB8E; /* Hijau Tua */
+            --color-2: #AFC8AD; /* Hijau Muda */
+            --color-3: #EEE7DA; /* Krem Gelap */
+            --color-4: #F2F1EB; /* Krem Terang (Background Utama) */
             --font-heading: 'Satisfy', cursive;
             --font-body: 'Poppins', sans-serif;
         }
@@ -242,165 +238,29 @@
         }
 
         /* --- KEYFRAMES ANIMASI --- */
-        @keyframes spinLoader {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+        @keyframes spinLoader { 100% { transform: rotate(360deg); } }
+        @keyframes reverseSpin { 100% { transform: rotate(-360deg); } }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideRight { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideLeft { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes cornerTL { from { transform: translate(-100%, -100%); opacity: 0; } to { transform: translate(0, 0); opacity: 1; } }
+        @keyframes cornerTR { from { transform: translate(100%, -100%); opacity: 0; } to { transform: translate(0, 0); opacity: 1; } }
+        @keyframes cornerBL { from { transform: translate(-100%, 100%); opacity: 0; } to { transform: translate(0, 0); opacity: 1; } }
+        @keyframes cornerBR { from { transform: translate(100%, 100%); opacity: 0; } to { transform: translate(0, 0); opacity: 1; } }
 
-        @keyframes reverseSpin {
-            100% {
-                transform: rotate(-360deg);
-            }
-        }
+        .page.active .anim-zoom-in { animation: zoomIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+        .page.active .anim-slide-down { animation: slideDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+        .page.active .anim-slide-up { animation: slideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+        .page.active .anim-slide-right { animation: slideRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+        .page.active .anim-slide-left { animation: slideLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
 
-        @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideRight {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideLeft {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes cornerTL {
-            from {
-                transform: translate(-100%, -100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translate(0, 0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes cornerTR {
-            from {
-                transform: translate(100%, -100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translate(0, 0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes cornerBL {
-            from {
-                transform: translate(-100%, 100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translate(0, 0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes cornerBR {
-            from {
-                transform: translate(100%, 100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translate(0, 0);
-                opacity: 1;
-            }
-        }
-
-        .page.active .anim-zoom-in {
-            animation: zoomIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-        }
-
-        .page.active .anim-slide-down {
-            animation: slideDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-        }
-
-        .page.active .anim-slide-up {
-            animation: slideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-        }
-
-        .page.active .anim-slide-right {
-            animation: slideRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-        }
-
-        .page.active .anim-slide-left {
-            animation: slideLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-        }
-
-        .page.active .d-1 {
-            animation-delay: 0.15s;
-        }
-
-        .page.active .d-2 {
-            animation-delay: 0.3s;
-        }
-
-        .page.active .d-3 {
-            animation-delay: 0.45s;
-        }
-
-        .page.active .d-4 {
-            animation-delay: 0.6s;
-        }
-
-        .page.active .d-5 {
-            animation-delay: 0.75s;
-        }
+        .page.active .d-1 { animation-delay: 0.15s; }
+        .page.active .d-2 { animation-delay: 0.3s; }
+        .page.active .d-3 { animation-delay: 0.45s; }
+        .page.active .d-4 { animation-delay: 0.6s; }
+        .page.active .d-5 { animation-delay: 0.75s; }
 
         /* ANIMASI FLORAL SUDUT */
         .corner-asset {
@@ -411,29 +271,10 @@
             opacity: 0;
         }
 
-        .app-container.start-anim .corner-asset.top-left {
-            animation: cornerTL 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-            top: 0;
-            left: 0;
-        }
-
-        .app-container.start-anim .corner-asset.top-right {
-            animation: cornerTR 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-            top: 0;
-            right: 0;
-        }
-
-        .app-container.start-anim .corner-asset.bottom-left {
-            animation: cornerBL 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-            bottom: 70px;
-            left: 0;
-        }
-
-        .app-container.start-anim .corner-asset.bottom-right {
-            animation: cornerBR 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-            bottom: 70px;
-            right: 0;
-        }
+        .app-container.start-anim .corner-asset.top-left { animation: cornerTL 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; top: 0; left: 0; }
+        .app-container.start-anim .corner-asset.top-right { animation: cornerTR 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; top: 0; right: 0; }
+        .app-container.start-anim .corner-asset.bottom-left { animation: cornerBL 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; bottom: 70px; left: 0; }
+        .app-container.start-anim .corner-asset.bottom-right { animation: cornerBR 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; bottom: 70px; right: 0; }
 
         /* --- KOMPONEN LAINNYA --- */
         .opening-cover-image {
@@ -486,13 +327,8 @@
             text-align: center;
         }
 
-        .countdown-box h3 {
-            font-size: 20px;
-        }
-
-        .countdown-box p {
-            font-size: 10px;
-        }
+        .countdown-box h3 { font-size: 20px; }
+        .countdown-box p { font-size: 10px; }
 
         .map-placeholder {
             width: 100%;
@@ -517,6 +353,15 @@
             max-width: 400px;
             margin-left: auto;
             margin-right: auto;
+            
+            /* FITUR GLASSMORPHISM UNTUK MEMBURAMKAN BACKGROUND */
+            background: rgba(255, 255, 255, 0.65); /* Warna dasar agak putih transparan */
+            backdrop-filter: blur(8px); /* Efek buram ke background di belakangnya */
+            -webkit-backdrop-filter: blur(8px); /* Efek buram untuk Safari */
+            padding: 30px 10px; /* Jarak ruang bernapas di dalam kotak */
+            border-radius: 20px; /* Ujung membulat elegan */
+            border: 1px solid rgba(255, 255, 255, 0.8); /* Garis tepi tipis mengkilap */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05); /* Bayangan sangat halus */
         }
 
         .adab-item {
@@ -947,6 +792,7 @@
 
         <section id="page-adab" class="page">
             <h2 class="title-font anim-slide-down" style="padding: 25px 0 0 0;font-size: 32px;">Adab-Adab Walimah</h2>
+            
             <div class="adab-grid">
                 <div class="adab-item anim-zoom-in d-1">
                     <img src="assets/asset-wedding/logo-makan.svg" alt="Adab Makan Icon">
