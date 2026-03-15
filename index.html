@@ -507,10 +507,11 @@
             overflow: hidden;
         }
 
+        /* --- GRID ADAB --- */
         .adab-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0 5px;
+            gap: 25px 10px;
             margin-top: 20px;
             width: 100%;
             max-width: 400px;
@@ -520,16 +521,25 @@
 
         .adab-item {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
             width: 100%;
+            text-align: center;
         }
 
         .adab-item img {
             width: 100% !important;
-            max-width: 140px !important;
+            max-width: 100px !important;
             height: auto !important;
             object-fit: contain !important;
+        }
+
+        .adab-item p {
+            font-size: 12px;
+            line-height: 1.4;
+            color: #444;
+            font-weight: 600;
         }
 
         .adab-item:nth-child(5):last-child {
@@ -688,7 +698,6 @@
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            margin-top: 20px;
             width: 100%;
             text-align: center;
             border: 1px solid var(--color-3);
@@ -807,7 +816,8 @@
                 <div class="profile-img"></div>
                 <h2 class="title-font" style="font-size: 24px;">Iqbal Imaddudin Rachman, S.Kom.</h2>
                 <p style="font-size: 12px; margin-top: 5px;">Putra dari Bapak Ir. Rachman Lamiran <br>& Ibu M. Munawaroh
-                    <i>RahimahaAllah</i></p>
+                    <i>RahimahaAllah</i>
+                </p>
             </div>
 
             <div class="ampersand anim-zoom-in d-1">&</div>
@@ -908,15 +918,30 @@
             <button class="btn anim-slide-up d-1" style="margin-top: 30px; background-color: #B58A61;"
                 onclick="toggleGift()">? Cashless</button>
 
-            <div id="giftDetails" class="gift-details" style="display: none;">
-                <p style="font-weight: bold; font-size: 18px; margin-bottom: 5px;">BCA</p>
-                <h2 id="rekBCA"
-                    style="font-size: 24px; color: var(--color-1); letter-spacing: 2px; margin-bottom: 5px;">12345678
-                </h2>
-                <p style="font-size: 12px; margin-bottom: 15px;">BCA : Atas Nama Iqbal Imaddudin Rachman</p>
-                <button class="btn"
-                    style="width: auto; padding: 8px 20px; font-size: 12px; margin-top: 0; background-color: #B58A61;"
-                    onclick="copyRekening('rekBCA')">Salin Rekening</button>
+            <div id="giftDetails" style="display: none; width: 100%;">
+
+                <div class="gift-details" style="margin-top: 20px;">
+                    <p style="font-weight: bold; font-size: 18px; margin-bottom: 5px;">Bank Jago</p>
+                    <h2 id="rek1"
+                        style="font-size: 24px; color: var(--color-1); letter-spacing: 2px; margin-bottom: 5px;">
+                        12345678</h2>508888464281
+                    <p style="font-size: 12px; margin-bottom: 15px;">A.N. Iqbal Imaddudin Rachman</p>
+                    <button class="btn"
+                        style="width: auto; padding: 8px 20px; font-size: 12px; margin-top: 0; background-color: #B58A61;"
+                        onclick="copyRekening('rek1')">Salin Rekening</button>
+                </div>
+
+                <div class="gift-details" style="margin-top: 15px;">
+                    <p style="font-weight: bold; font-size: 18px; margin-bottom: 5px;">Blu by BCA Digital</p>
+                    <h2 id="rek2"
+                        style="font-size: 24px; color: var(--color-1); letter-spacing: 2px; margin-bottom: 5px;">
+                        003288378748</h2>
+                    <p style="font-size: 12px; margin-bottom: 15px;">A.N. Mega Nur Rizky</p>
+                    <button class="btn"
+                        style="width: auto; padding: 8px 20px; font-size: 12px; margin-top: 0; background-color: #B58A61;"
+                        onclick="copyRekening('rek2')">Salin Rekening</button>
+                </div>
+
             </div>
         </section>
 
@@ -924,21 +949,24 @@
             <h2 class="title-font anim-slide-down" style="padding: 25px 0 0 0;font-size: 32px;">Adab-Adab Walimah</h2>
             <div class="adab-grid">
                 <div class="adab-item anim-zoom-in d-1">
-                    <img src="assets/asset-wedding/logo-makan.svg" alt="Adab Makan Icon" style="object-fit: contain;">
+                    <img src="assets/asset-wedding/logo-makan.svg" alt="Adab Makan Icon">
+                    <p>Perhatikan Adab Makan</p>
                 </div>
                 <div class="adab-item anim-zoom-in d-2">
-                    <img src="assets/asset-wedding/logo-larangan-merokok.svg" alt="Adab Merokok Icon"
-                        style="object-fit: contain;">
+                    <img src="assets/asset-wedding/logo-larangan-merokok.svg" alt="Adab Merokok Icon">
+                    <p>Dilarang merokok di dalam ruangan</p>
                 </div>
                 <div class="adab-item anim-zoom-in d-3">
-                    <img src="assets/asset-wedding/logo-doa.svg" alt="Adab Mendoakan Icon" style="object-fit: contain;">
+                    <img src="assets/asset-wedding/logo-doa.svg" alt="Adab Mendoakan Icon">
+                    <p>Mendoakan kedua mempelai</p>
                 </div>
                 <div class="adab-item anim-zoom-in d-4">
-                    <img src="assets/asset-wedding/logo-shalat.svg" alt="Adab Sholat Icon" style="object-fit: contain;">
+                    <img src="assets/asset-wedding/logo-shalat.svg" alt="Adab Sholat Icon">
+                    <p>Perhatikan waktu shalat</p>
                 </div>
                 <div class="adab-item anim-zoom-in d-5">
-                    <img src="assets/asset-wedding/logo-pakaian.svg" alt="Adab Pakaian Icon"
-                        style="object-fit: contain;">
+                    <img src="assets/asset-wedding/logo-pakaian.svg" alt="Adab Pakaian Icon">
+                    <p>Berpakaian sopan & menutup aurat</p>
                 </div>
             </div>
         </section>
@@ -989,190 +1017,183 @@
     </div>
 
     <script>
-    // --- URL WEB APP GOOGLE SHEETS KAMU ---
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8R75qjEkU4KzuCMMU1ttRKxQJ8FAPGH93pb1BHiZ3bxK-JVYDGhyKRWVbdh8WU7Qp/exec";
+        // --- URL WEB APP GOOGLE SHEETS KAMU ---
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8R75qjEkU4KzuCMMU1ttRKxQJ8FAPGH93pb1BHiZ3bxK-JVYDGhyKRWVbdh8WU7Qp/exec";
 
-    // VARIABEL AUDIO & SLIDER
-    const bgMusic = document.getElementById("bgMusic");
-    const musicBtn = document.getElementById("musicBtn");
-    const autoSlideBtn = document.getElementById("autoSlideBtn");
-    let isMusicPlaying = false;
-    let isAutoSliding = false;
-    let autoSlideInterval;
-    let currentPageIndex = 0;
+        // VARIABEL AUDIO & SLIDER
+        const bgMusic = document.getElementById("bgMusic");
+        const musicBtn = document.getElementById("musicBtn");
+        const autoSlideBtn = document.getElementById("autoSlideBtn");
+        let isMusicPlaying = false;
+        let isAutoSliding = false;
+        let autoSlideInterval;
+        let currentPageIndex = 0;
 
-    const pagesList = [
-        'page-opening', 'page-quotes', 'page-salam', 'page-mempelai',
-        'page-acara', 'page-maps', 'page-rsvp', 'page-gift', 'page-adab', 'page-thanks'
-    ];
+        const pagesList = [
+            'page-opening', 'page-quotes', 'page-salam', 'page-mempelai',
+            'page-acara', 'page-maps', 'page-rsvp', 'page-gift', 'page-adab', 'page-thanks'
+        ];
 
-    window.addEventListener('load', function () {
-        const loader = document.getElementById('loader');
-        
-        // --- LOGIKA MENGAMBIL NAMA TAMU DARI URL ---
-        const urlParams = new URLSearchParams(window.location.search);
-        const tamu = urlParams.get('to'); // Mengambil nilai setelah ?to=
-        
-        if (tamu) {
-            // Jika ada parameter ?to=, ganti teks di halaman opening
-            document.getElementById('namaTamu').innerText = tamu;
-            
-            // Opsional: Isi otomatis kolom nama di form RSVP
-            const rsvpNamaInput = document.getElementById('rsvpNama');
-            if (rsvpNamaInput) {
-                rsvpNamaInput.value = tamu;
+        window.addEventListener('load', function () {
+            const loader = document.getElementById('loader');
+
+            // --- LOGIKA MENGAMBIL NAMA TAMU DARI URL ---
+            const urlParams = new URLSearchParams(window.location.search);
+            const tamu = urlParams.get('to');
+
+            if (tamu) {
+                document.getElementById('namaTamu').innerText = tamu;
+                const rsvpNamaInput = document.getElementById('rsvpNama');
+                if (rsvpNamaInput) {
+                    rsvpNamaInput.value = tamu;
+                }
+            }
+
+            setTimeout(function () {
+                loader.style.opacity = '0';
+                setTimeout(function () {
+                    loader.style.display = 'none';
+                    document.getElementById('page-opening').classList.add('active');
+                    document.querySelector('.app-container').classList.add('start-anim');
+                }, 500);
+            }, 1500);
+        });
+
+        function switchPage(pageId, navElement, fromAutoSlide = false) {
+            const pages = document.querySelectorAll('.page');
+            const appContainer = document.querySelector('.app-container');
+
+            pages.forEach(page => page.classList.remove('active'));
+            appContainer.classList.remove('start-anim');
+
+            setTimeout(() => {
+                document.getElementById(pageId).classList.add('active');
+                appContainer.classList.add('start-anim');
+            }, 10);
+
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            if (navElement) {
+                navElement.classList.add('active');
+                navElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+
+            currentPageIndex = pagesList.indexOf(pageId);
+            if (!fromAutoSlide && isAutoSliding) {
+                startAutoSlideTimer();
             }
         }
-        // ---------------------------------------------
 
-        setTimeout(function () {
-            loader.style.opacity = '0';
-            setTimeout(function () {
-                loader.style.display = 'none';
-                document.getElementById('page-opening').classList.add('active');
-                document.querySelector('.app-container').classList.add('start-anim');
-            }, 500);
-        }, 1500);
-    });
-
-    function switchPage(pageId, navElement, fromAutoSlide = false) {
-        const pages = document.querySelectorAll('.page');
-        const appContainer = document.querySelector('.app-container');
-
-        pages.forEach(page => page.classList.remove('active'));
-        appContainer.classList.remove('start-anim');
-
-        setTimeout(() => {
-            document.getElementById(pageId).classList.add('active');
-            appContainer.classList.add('start-anim');
-        }, 10);
-
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(item => item.classList.remove('active'));
-
-        if (navElement) {
-            navElement.classList.add('active');
-            navElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        function openInvitation() {
+            document.body.classList.add('invitation-opened');
+            if (bgMusic) {
+                bgMusic.play().then(() => {
+                    isMusicPlaying = true;
+                    musicBtn.classList.add('music-spin');
+                }).catch((error) => console.log("Audio diblokir browser"));
+            }
+            const quotesNavElement = document.querySelectorAll('.nav-item')[1];
+            switchPage('page-quotes', quotesNavElement);
         }
 
-        currentPageIndex = pagesList.indexOf(pageId);
-        if (!fromAutoSlide && isAutoSliding) {
-            startAutoSlideTimer();
+        function toggleMusic() {
+            if (!bgMusic) return;
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicBtn.classList.remove('music-spin');
+                isMusicPlaying = false;
+            } else {
+                bgMusic.play().then(() => {
+                    musicBtn.classList.add('music-spin');
+                    isMusicPlaying = true;
+                });
+            }
         }
-    }
 
-    function openInvitation() {
-        document.body.classList.add('invitation-opened');
-        if (bgMusic) {
-            bgMusic.play().then(() => {
-                isMusicPlaying = true;
-                musicBtn.classList.add('music-spin');
-            }).catch((error) => console.log("Audio diblokir browser"));
+        function toggleAutoSlide() {
+            isAutoSliding = !isAutoSliding;
+            if (isAutoSliding) {
+                autoSlideBtn.innerHTML = "⏸";
+                startAutoSlideTimer();
+            } else {
+                autoSlideBtn.innerHTML = "▶";
+                clearInterval(autoSlideInterval);
+            }
         }
-        const quotesNavElement = document.querySelectorAll('.nav-item')[1];
-        switchPage('page-quotes', quotesNavElement);
-    }
 
-    function toggleMusic() {
-        if (!bgMusic) return;
-        if (isMusicPlaying) {
-            bgMusic.pause();
-            musicBtn.classList.remove('music-spin');
-            isMusicPlaying = false;
-        } else {
-            bgMusic.play().then(() => {
-                musicBtn.classList.add('music-spin');
-                isMusicPlaying = true;
-            });
-        }
-    }
-
-    function toggleAutoSlide() {
-        isAutoSliding = !isAutoSliding;
-        if (isAutoSliding) {
-            autoSlideBtn.innerHTML = "⏸";
-            startAutoSlideTimer();
-        } else {
-            autoSlideBtn.innerHTML = "▶";
+        function startAutoSlideTimer() {
             clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(() => {
+                currentPageIndex++;
+                if (currentPageIndex >= pagesList.length) { currentPageIndex = 1; }
+                const nextPageId = pagesList[currentPageIndex];
+                const targetNavElement = document.querySelectorAll('.nav-item')[currentPageIndex];
+                switchPage(nextPageId, targetNavElement, true);
+            }, 6000);
         }
-    }
 
-    function startAutoSlideTimer() {
-        clearInterval(autoSlideInterval);
-        autoSlideInterval = setInterval(() => {
-            currentPageIndex++;
-            if (currentPageIndex >= pagesList.length) { currentPageIndex = 1; }
-            const nextPageId = pagesList[currentPageIndex];
-            const targetNavElement = document.querySelectorAll('.nav-item')[currentPageIndex];
-            switchPage(nextPageId, targetNavElement, true);
-        }, 6000);
-    }
+        // --- FUNGSI RSVP & DATABASE ---
+        function openRSVP() {
+            document.getElementById('rsvpModal').style.display = 'flex';
+            ambilDataRSVP();
+        }
+        function closeRSVP() {
+            document.getElementById('rsvpModal').style.display = 'none';
+        }
 
-    // --- FUNGSI RSVP & DATABASE ---
-    function openRSVP() {
-        document.getElementById('rsvpModal').style.display = 'flex';
-        ambilDataRSVP(); // Tarik data saat modal dibuka
-    }
-    function closeRSVP() {
-        document.getElementById('rsvpModal').style.display = 'none';
-    }
+        function kirimRSVP(event) {
+            event.preventDefault();
 
-    function kirimRSVP(event) {
-        event.preventDefault(); // Cegah reload halaman
+            const btnSubmit = document.getElementById("btnSubmitRSVP");
+            btnSubmit.innerHTML = "Mengirim...";
+            btnSubmit.disabled = true;
 
-        const btnSubmit = document.getElementById("btnSubmitRSVP");
-        btnSubmit.innerHTML = "Mengirim...";
-        btnSubmit.disabled = true;
+            const formData = new URLSearchParams();
+            formData.append('nama', document.getElementById('rsvpNama').value);
+            formData.append('kehadiran', document.getElementById('rsvpHadir').value);
+            formData.append('ucapan', document.getElementById('rsvpUcapan').value);
 
-        const formData = new URLSearchParams();
-        formData.append('nama', document.getElementById('rsvpNama').value);
-        formData.append('kehadiran', document.getElementById('rsvpHadir').value);
-        formData.append('ucapan', document.getElementById('rsvpUcapan').value);
-
-        fetch(SCRIPT_URL, {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => {
-                document.getElementById('rsvpForm').reset();
-                btnSubmit.innerHTML = "Kirim";
-                btnSubmit.disabled = false;
-                ambilDataRSVP(); // Perbarui daftar pesan
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: formData
             })
-            .catch(error => {
-                console.error('Error!', error.message);
-                btnSubmit.innerHTML = "Kirim";
-                btnSubmit.disabled = false;
-            });
-    }
+                .then(response => {
+                    document.getElementById('rsvpForm').reset();
+                    btnSubmit.innerHTML = "Kirim";
+                    btnSubmit.disabled = false;
+                    ambilDataRSVP();
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    btnSubmit.innerHTML = "Kirim";
+                    btnSubmit.disabled = false;
+                });
+        }
 
-    // --- MENGGUNAKAN WARNA AVATAR ACAK ---
-    const colors = ["#FF5733", "#33FF57", "#3357FF", "#F333FF", "#FF33A1", "#33FFF3"];
+        const colors = ["#FF5733", "#33FF57", "#3357FF", "#F333FF", "#FF33A1", "#33FFF3"];
 
-    function ambilDataRSVP() {
-        const feed = document.getElementById('rsvpFeed');
+        function ambilDataRSVP() {
+            const feed = document.getElementById('rsvpFeed');
 
-        fetch(SCRIPT_URL)
-            .then(res => res.json())
-            .then(data => {
-                feed.innerHTML = "";
+            fetch(SCRIPT_URL)
+                .then(res => res.json())
+                .then(data => {
+                    feed.innerHTML = "";
 
-                if (data.length === 0) {
-                    feed.innerHTML = "<p style='font-size: 12px; text-align: center; color: #888;'>Belum ada ucapan. Jadilah yang pertama!</p>";
-                    return;
-                }
+                    if (data.length === 0) {
+                        feed.innerHTML = "<p style='font-size: 12px; text-align: center; color: #888;'>Belum ada ucapan. Jadilah yang pertama!</p>";
+                        return;
+                    }
 
-                data.forEach((item, index) => {
-                    let inisial = item.nama.substring(0, 2).toUpperCase();
-                    let badgeClass = item.kehadiran === "Hadir" ? "badge-hadir" : "badge-absen";
-                    let tgl = new Date(item.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-                    let jam = new Date(item.tanggal).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+                    data.forEach((item, index) => {
+                        let inisial = item.nama.substring(0, 2).toUpperCase();
+                        let badgeClass = item.kehadiran === "Hadir" ? "badge-hadir" : "badge-absen";
+                        let tgl = new Date(item.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+                        let jam = new Date(item.tanggal).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+                        let randomColor = colors[index % colors.length];
 
-                    // Pilih warna secara acak berdasarkan index
-                    let randomColor = colors[index % colors.length];
-
-                    let html = `
+                        let html = `
                         <div class="msg-item">
                             <div class="msg-avatar" style="background-color: ${randomColor};">${inisial}</div>
                             <div class="msg-body">
@@ -1183,55 +1204,54 @@
                                 <p class="msg-time">${tgl} at ${jam}</p>
                             </div>
                         </div>`;
-                    feed.innerHTML += html;
+                        feed.innerHTML += html;
+                    });
+                })
+                .catch(err => {
+                    feed.innerHTML = "<p style='font-size: 12px; text-align: center; color: red;'>Gagal memuat pesan. Pastikan Link Apps Script sudah di-deploy dengan benar.</p>";
                 });
-            })
-            .catch(err => {
-                feed.innerHTML = "<p style='font-size: 12px; text-align: center; color: red;'>Gagal memuat pesan. Pastikan Link Apps Script sudah di-deploy dengan benar.</p>";
+        }
+
+        // --- FUNGSI GIFT CASHLESS ---
+        function toggleGift() {
+            const giftDiv = document.getElementById('giftDetails');
+            if (giftDiv.style.display === 'none') {
+                giftDiv.style.display = 'block';
+                giftDiv.classList.add('anim-slide-up');
+            } else {
+                giftDiv.style.display = 'none';
+                giftDiv.classList.remove('anim-slide-up');
+            }
+        }
+
+        function copyRekening(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Nomor rekening " + text + " berhasil disalin!");
             });
-    }
-
-    // --- FUNGSI GIFT CASHLESS ---
-    function toggleGift() {
-        const giftDiv = document.getElementById('giftDetails');
-        if (giftDiv.style.display === 'none') {
-            giftDiv.style.display = 'block';
-            giftDiv.classList.add('anim-slide-up');
-        } else {
-            giftDiv.style.display = 'none';
-            giftDiv.classList.remove('anim-slide-up');
         }
-    }
 
-    function copyRekening(elementId) {
-        const text = document.getElementById(elementId).innerText;
-        navigator.clipboard.writeText(text).then(() => {
-            alert("Nomor rekening " + text + " berhasil disalin!");
-        });
-    }
+        // --- TIMER ---
+        const countDownDate = new Date("Mar 29, 2026 08:00:00").getTime();
+        const hitungMundur = setInterval(function () {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
 
-    // --- TIMER ---
-    const countDownDate = new Date("Mar 29, 2026 08:00:00").getTime();
-    const hitungMundur = setInterval(function () {
-        const now = new Date().getTime();
-        const distance = countDownDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        if (document.getElementById("hari")) {
-            document.getElementById("hari").innerHTML = days < 10 ? "0" + days : days;
-            document.getElementById("jam").innerHTML = hours < 10 ? "0" + hours : hours;
-            document.getElementById("menit").innerHTML = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("detik").innerHTML = seconds < 10 ? "0" + seconds : seconds;
-        }
-        if (distance < 0) {
-            clearInterval(hitungMundur);
-        }
-    }, 1000);
-</script>
+            if (document.getElementById("hari")) {
+                document.getElementById("hari").innerHTML = days < 10 ? "0" + days : days;
+                document.getElementById("jam").innerHTML = hours < 10 ? "0" + hours : hours;
+                document.getElementById("menit").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById("detik").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+            }
+            if (distance < 0) {
+                clearInterval(hitungMundur);
+            }
+        }, 1000);
     </script>
 </body>
 
