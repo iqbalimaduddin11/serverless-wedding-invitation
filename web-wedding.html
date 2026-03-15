@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation - Iqbal & Mega</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Satisfy&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* COLOR PALETTES & VARIABLES */
+        :root {
+            --color-1: #88AB8E;
+            /* Hijau Tua */
+            --color-2: #AFC8AD;
+            /* Hijau Muda */
+            --color-3: #EEE7DA;
+            /* Krem Gelap */
+            --color-4: #F2F1EB;
+            /* Krem Terang (Background Utama) */
+            --font-heading: 'Satisfy', cursive;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            font-family: var(--font-body);
+            color: #333;
+        }
+
+        /* --- LOADING SCREEN --- */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-4);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader-logo {
+            font-family: var(--font-heading);
+            font-size: 30px;
+            color: var(--color-1);
+            width: 70px;
+            height: 70px;
+            border: 3px dashed var(--color-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: spinLoader 2s linear infinite;
+        }
+
+        .loader-logo span {
+            animation: reverseSpin 2s linear infinite;
+        }
+
+        /* MOBILE APP CONTAINER */
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            background-color: var(--color-4);
+            position: relative;
+            background-image: url("assets/asset-wedding/background-dasar.svg");
+            background-size: contain;
+            background-position: center;
+            background-attachment: fixed;
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
+
+        /* TYPOGRAPHY */
+        .title-font {
+            font-family: var(--font-heading);
+            color: var(--color-1);
+        }
+
+        .italic-text {
+            font-style: italic;
+        }
+
+        /* SECTION / PAGES */
+        .page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 80px);
+            padding: 40px 50px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        /* BUTTONS */
+        .btn {
+            background-color: var(--color-1);
+            color: var(--color-4);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 50%;
+            max-width: 280px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- FLOATING ACTION BUTTONS --- */
+        .floating-wrapper {
+            position: fixed;
+            bottom: 100px;
+            width: 100%;
+            max-width: 480px;
+            pointer-events: none;
+            z-index: 15;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+        }
+
+        body.invitation-opened .floating-wrapper {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .floating-buttons {
+            position: absolute;
+            right: 20px;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            pointer-events: auto;
+        }
+
+        .float-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--color-2);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .float-btn:active {
+            transform: scale(0.9);
+        }
+
+        .music-spin {
+            animation: spinLoader 3s linear infinite;
+        }
+
+        /* --- BOTTOM NAVIGATION --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--color-3);
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 0;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            z-index: 20;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            transform: translateY(100%);
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        body.invitation-opened .bottom-nav {
+            transform: translateY(0);
+        }
+
+        .bottom-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-item {
+            flex: 0 0 auto;
+            width: 75px;
+            background: none;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            color: var(--color-1);
+            opacity: 0.6;
+            font-family: var(--font-body);
+            font-size: 10px;
+        }
+
+        .nav-item.active {
+            opacity: 1;
+            font-weight: 600;
+            background-color: var(--color-2);
+            border-radius: 10px;
+            padding: 5px 0;
+            color: var(--color-4);
+        }
+
+        .nav-icon {
+            font-size: 18px;
+        }
+
+        /* --- KEYFRAMES ANIMASI --- */
+        @keyframes spinLoader {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes reverseSpin {
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideLeft {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes cornerTL {
+            from {
+                transform: translate(-100%, -100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes cornerTR {
+            from {
+                transform: translate(100%, -100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes cornerBL {
+            from {
+                transform: translate(-100%, 100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes cornerBR {
+            from {
+                transform: translate(100%, 100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+        }
+
+        .page.active .anim-zoom-in {
+            animation: zoomIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        .page.active .anim-slide-down {
+            animation: slideDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        .page.active .anim-slide-up {
+            animation: slideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        .page.active .anim-slide-right {
+            animation: slideRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        .page.active .anim-slide-left {
+            animation: slideLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        .page.active .d-1 {
+            animation-delay: 0.15s;
+        }
+
+        .page.active .d-2 {
+            animation-delay: 0.3s;
+        }
+
+        .page.active .d-3 {
+            animation-delay: 0.45s;
+        }
+
+        .page.active .d-4 {
+            animation-delay: 0.6s;
+        }
+
+        .page.active .d-5 {
+            animation-delay: 0.75s;
+        }
+
+        /* ANIMASI FLORAL SUDUT */
+        .corner-asset {
+            position: absolute;
+            max-width: 180px;
+            z-index: 5;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .app-container.start-anim .corner-asset.top-left {
+            animation: cornerTL 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            top: 0;
+            left: 0;
+        }
+
+        .app-container.start-anim .corner-asset.top-right {
+            animation: cornerTR 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            top: 0;
+            right: 0;
+        }
+
+        .app-container.start-anim .corner-asset.bottom-left {
+            animation: cornerBL 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            bottom: 70px;
+            left: 0;
+        }
+
+        .app-container.start-anim .corner-asset.bottom-right {
+            animation: cornerBR 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            bottom: 70px;
+            right: 0;
+        }
+
+        /* --- KOMPONEN LAINNYA --- */
+        .opening-cover-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .quote-box {
+            border: 1px solid var(--color-2);
+            padding: 38px;
+            border-radius: 15px;
+            border-top-left-radius: 200px;
+            border-top-right-radius: 200px;
+            margin-top: 20px;
+            font-size: 12px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            background-color: var(--color-3);
+            border-radius: 50%;
+            margin: 20px auto 10px;
+        }
+
+        .ampersand {
+            font-family: var(--font-heading);
+            font-size: 40px;
+            color: var(--color-1);
+            margin: 20px 0;
+        }
+
+        .countdown-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .countdown-box {
+            background-color: var(--color-1);
+            color: var(--color-4);
+            padding: 10px;
+            border-radius: 10px;
+            width: 60px;
+            text-align: center;
+        }
+
+        .countdown-box h3 {
+            font-size: 20px;
+        }
+
+        .countdown-box p {
+            font-size: 10px;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 250px;
+            background-color: var(--color-3);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-1);
+            overflow: hidden;
+        }
+
+        .adab-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 5px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .adab-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .adab-item img {
+            width: 100% !important;
+            max-width: 140px !important;
+            height: auto !important;
+            object-fit: contain !important;
+        }
+
+        .adab-item:nth-child(5):last-child {
+            grid-column: span 2;
+            justify-self: center;
+            width: 50%;
+        }
+
+        /* --- STYLING MODAL RSVP & DAFTAR PESAN --- */
+        .rsvp-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rsvp-content {
+            background: white;
+            width: 90%;
+            max-width: 420px;
+            padding: 25px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .rsvp-form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            margin-bottom: 12px;
+        }
+
+        .rsvp-form-group label {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .rsvp-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 13px;
+            background-color: white;
+            outline: none;
+        }
+
+        .rsvp-input:focus {
+            border-color: var(--color-1);
+        }
+
+        .rsvp-feed {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            max-height: 250px;
+        }
+
+        .msg-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f9f9f9;
+            padding-bottom: 12px;
+            text-align: left;
+        }
+
+        .msg-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .msg-body {
+            flex-grow: 1;
+        }
+
+        .msg-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        .msg-name {
+            font-weight: 600;
+            font-size: 13px;
+            margin: 0;
+            color: #333;
+        }
+
+        .msg-badge {
+            padding: 2px 6px;
+            border-radius: 5px;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .badge-hadir {
+            background-color: #d1f2eb;
+            color: #27ae60;
+        }
+
+        .badge-absen {
+            background-color: #fadbd8;
+            color: #c0392b;
+        }
+
+        .msg-text {
+            font-size: 12px;
+            color: #555;
+            margin: 0 0 4px 0;
+        }
+
+        .msg-time {
+            font-size: 10px;
+            color: #999;
+            margin: 0;
+        }
+
+        /* --- STYLING GIFT CARD --- */
+        .gift-details {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid var(--color-3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="loader">
+        <div class="loader-logo">
+            <span>I/M</span>
+        </div>
+    </div>
+
+    <div id="rsvpModal" class="rsvp-modal">
+        <div class="rsvp-content anim-zoom-in">
+            <span class="close-modal" onclick="closeRSVP()">×</span>
+            <h3 class="title-font" style="font-size: 28px; margin-bottom: 15px; text-align: center;">RSVP</h3>
+
+            <form id="rsvpForm" onsubmit="kirimRSVP(event)">
+                <div class="rsvp-form-group">
+                    <label>Nama</label>
+                    <input type="text" id="rsvpNama" placeholder="Nama Tamu" required class="rsvp-input">
+                </div>
+
+                <div class="rsvp-form-group">
+                    <label>Kehadiran</label>
+                    <select id="rsvpHadir" required class="rsvp-input">
+                        <option value="Hadir">Hadir</option>
+                        <option value="Tidak Hadir">Tidak Hadir</option>
+                    </select>
+                </div>
+
+                <div class="rsvp-form-group">
+                    <label>Komentar atau Ucapan</label>
+                    <textarea id="rsvpUcapan" placeholder="Komentar atau Ucapan" rows="3" required
+                        class="rsvp-input"></textarea>
+                </div>
+
+                <button type="submit" id="btnSubmitRSVP" class="btn"
+                    style="width: 100%; margin-top: 5px; max-width: 100%; background-color: #B58A61;">Kirim</button>
+            </form>
+
+            <div class="rsvp-feed" id="rsvpFeed">
+                <p style="font-size: 12px; text-align: center; color: #888;">Memuat pesan...</p>
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="assets/asset-music/videoplayback.mp4" type="audio/mpeg">
+    </audio>
+
+    <div class="app-container">
+        <img src="assets/asset-wedding/floral-background-atas-kanan.svg" alt="Top Right Decor"
+            class="corner-asset top-right">
+        <img src="assets/asset-wedding/floral-background-atas-kiri.svg" alt="Top Left Decor"
+            class="corner-asset top-left">
+        <img src="assets/asset-wedding/floral-background-bawah-kanan.svg" alt="Bottom Right Decor"
+            class="corner-asset bottom-right">
+        <img src="assets/asset-wedding/floral-background-bawah-kiri.svg" alt="Bottom Left Decor"
+            class="corner-asset bottom-left">
+
+        <div class="floating-wrapper">
+            <div class="floating-buttons">
+                <button class="float-btn" id="autoSlideBtn" onclick="toggleAutoSlide()">▶</button>
+                <button class="float-btn music-spin" id="musicBtn" onclick="toggleMusic()">🎵</button>
+            </div>
+        </div>
+
+        <section id="page-opening" class="page">
+            <p class="anim-slide-down d-1" style="font-size: 12px; letter-spacing: 2px; margin-bottom: 30px;">WEDDING
+                INVITATION</p>
+            <img class="opening-cover-image anim-zoom-in" style="width: 400px; height: 300px;"
+                src="assets/asset-wedding/IM.svg" alt="Iqbal & Mega Cover">
+
+            <div class="anim-zoom-in" style="font-size: 14px; margin-top: 50px;">
+                <p>Kepada Yth.</p>
+                <p>Bapak/Ibu/Saudara/i</p>
+                <h3 id="namaTamu" style="margin-top: 10px; color: var(--color-1);">Tamu Undangan</h3>
+            </div>
+            <button class="btn anim-zoom-in d-1" onclick="openInvitation()">Open Invitation</button>
+        </section>
+
+        <section id="page-quotes" class="page">
+            <div class="quote-box">
+                <div class="anim-slide-down">
+                    <h1 class="title-font" style="text-align: right; font-size: 36px; margin-bottom: -10px;">Iqbal</h1>
+                    <h1 class="title-font" style="text-align: right; font-size: 36px;">Mega</h1>
+                    <p style="text-align: right; font-size: 10px; margin-bottom: 20px;">Surah Ar Ruum : 21</p>
+                </div>
+                <div class="anim-slide-up d-1">
+                    <p>Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari
+                        jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di
+                        antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda
+                        (kebesaran Allah) bagi kaum yang berpikir.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-salam" class="page">
+            <img class="opening-cover-image anim-zoom-in" style="width: 400px; height: 300px;"
+                src="assets/asset-wedding/IM.svg" alt="Iqbal & Mega Cover">
+
+            <div class="anim-slide-up d-1">
+                <p class="italic-text" style="margin-top: 30px; font-size: 14px;">Assalamu'alaikum Warahmatullahi
+                    Wabarakaatuh</p>
+                <p style="margin-top: 20px; font-size: 14px; line-height: 1.6;">Tanpa mengurangi rasa hormat, kami
+                    bermaksud mengundang Bapak/Ibu/Saudara/i pada acara resepsi pernikahan kami</p>
+            </div>
+        </section>
+
+        <section id="page-mempelai" class="page">
+            <div class="anim-slide-right" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="profile-img"></div>
+                <h2 class="title-font" style="font-size: 24px;">Iqbal Imaddudin Rachman, S.Kom.</h2>
+                <p style="font-size: 12px; margin-top: 5px;">Putra dari Bapak Ir. Rachman Lamiran <br>& Ibu M. Munawaroh
+                    <i>RahimahaAllah</i></p>
+            </div>
+
+            <div class="ampersand anim-zoom-in d-1">&</div>
+
+            <div class="anim-slide-left d-1" style="display: flex; flex-direction: column; align-items: center;">
+                <h2 class="title-font" style="font-size: 24px;">Mega Nur Rizky</h2>
+                <p style="font-size: 12px; margin-top: 5px;">Putri dari Bapak Puddin<br>& Ibu Rosidah</p>
+                <div class="profile-img"></div>
+            </div>
+        </section>
+
+        <section id="page-acara" class="page">
+            <div class="anim-slide-right" style="width: 100%;">
+                <h2 class="title-font" style="font-size: 32px;">Akad Nikah</h2>
+                <p style="font-size: 13px; margin-top: 10px;">Ahad, 29 Maret 2026</p>
+                <p style="font-size: 13px;">Pukul 09.30 - 10.00 WIB</p>
+                <p style="font-size: 13px;">Masjid Al Muhajirin, Rusunawa Nagrak,<br> Cilincing, Jakarta Utara, DKI
+                    Jakarta</p>
+            </div>
+
+            <div class="anim-slide-left d-1" style="width: 100%;">
+                <h2 class="title-font" style="font-size: 32px; margin-top: 40px;">Resepsi</h2>
+                <p style="font-size: 13px; margin-top: 10px;">Ahad, 29 Maret 2026</p>
+                <p style="font-size: 13px;">Pukul 10:00 - 15.00 WIB</p>
+                <p style="font-size: 13px;">Aula Masjid Al Muhajirin, Rusunawa Nagrak,<br> Cilincing, Jakarta Utara, DKI
+                    Jakarta</p>
+            </div>
+
+            <div class="anim-slide-up d-2"
+                style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <div class="countdown-container">
+                    <div class="countdown-box">
+                        <h3 id="hari">00</h3>
+                        <p>Hari</p>
+                    </div>
+                    <div class="countdown-box">
+                        <h3 id="jam">00</h3>
+                        <p>Jam</p>
+                    </div>
+                    <div class="countdown-box">
+                        <h3 id="menit">00</h3>
+                        <p>Menit</p>
+                    </div>
+                    <div class="countdown-box">
+                        <h3 id="detik">00</h3>
+                        <p>Detik</p>
+                    </div>
+                </div>
+                <button class="btn" style="background-color: #B58A61;"
+                    onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Iqbal+%26+Mega&dates=20260329T023000Z/20260329T080000Z&details=Acara+Pernikahan+Iqbal+dan+Mega&location=Masjid+Al+Muhajirin,+Rusunawa+Nagrak,+Cilincing,+Jakarta+Utara', '_blank')">Add
+                    to Calendar</button>
+            </div>
+        </section>
+
+        <section id="page-maps" class="page">
+            <div class="map-placeholder anim-slide-down">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.06076722883!2d106.95383507498964!3d-6.12253016003738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a5b6ff08cbac9%3A0xc3df33cd88b0a991!2sMasjid%20Al%20Muhajirin%20Rusunawa%20Nagrak!5e0!3m2!1sid!2sid!4v1711202830832!5m2!1sid!2sid"
+                    width="100%" height="250px" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="anim-slide-up d-1">
+                <h3 style="font-size: 16px; margin-bottom: 5px;">Masjid Al Muhajirin, Rusunawa Nagrak,<br> Cilincing,
+                    Jakarta Utara, DKI Jakarta</h3>
+                <p style="font-size: 12px; margin-bottom: 20px;">Jalan Marunda Makmur, Kelurahan Cilincing,<br>
+                    Kecamatan Cilincing, Kota Jakarta Utara, DKI Jakarta.</p>
+                <button class="btn" style="background-color: #B58A61;"
+                    onclick="window.open('https://maps.app.goo.gl/yLzYZbQ7qE3PZ8H48', '_blank')">Buka Google
+                    Maps</button>
+            </div>
+        </section>
+
+        <section id="page-rsvp" class="page">
+            <h2 class="title-font anim-slide-down" style="font-size: 32px;">Do'a Untuk Pengantin</h2>
+
+            <div class="anim-slide-up d-1">
+                <p style="font-size: 13px; line-height: 1.6; margin-top: 20px;">"Semoga Allah memberkahimu di waktu
+                    bahagia dan memberkahimu di waktu susah, dan mengumpulkan kalian berdua dalam kebaikan"</p>
+                <p style="font-size: 12px; margin-top: 20px;">[HR. Abu Daud]</p>
+
+                <p style="font-size: 13px; margin-top: 40px;">Tekan tombol dibawah ini untuk mengirim ucapan dan
+                    konfirmasi kehadiran</p>
+
+                <button class="btn" style="margin-top: 15px; background-color: #B58A61;" onclick="openRSVP()">Konfirmasi
+                    & Kirim Ucapan</button>
+
+                <p style="font-size: 12px; margin-top: 30px;">Batas akhir konfirmasi<br>20 Maret 2026</p>
+            </div>
+        </section>
+
+        <section id="page-gift" class="page">
+            <div class="anim-slide-down" style="width: 100%;">
+                <h2 class="title-font" style="font-size: 32px;">Tanda Kasih</h2>
+                <p style="font-size: 13px; line-height: 1.6; margin-top: 20px;">Terima kasih telah menambah semangat
+                    kegembiraan pernikahan kami dengan kehadiran dan hadiah indah Anda.</p>
+            </div>
+
+            <button class="btn anim-slide-up d-1" style="margin-top: 30px; background-color: #B58A61;"
+                onclick="toggleGift()">? Cashless</button>
+
+            <div id="giftDetails" class="gift-details" style="display: none;">
+                <p style="font-weight: bold; font-size: 18px; margin-bottom: 5px;">BCA</p>
+                <h2 id="rekBCA"
+                    style="font-size: 24px; color: var(--color-1); letter-spacing: 2px; margin-bottom: 5px;">12345678
+                </h2>
+                <p style="font-size: 12px; margin-bottom: 15px;">BCA : Atas Nama Iqbal Imaddudin Rachman</p>
+                <button class="btn"
+                    style="width: auto; padding: 8px 20px; font-size: 12px; margin-top: 0; background-color: #B58A61;"
+                    onclick="copyRekening('rekBCA')">Salin Rekening</button>
+            </div>
+        </section>
+
+        <section id="page-adab" class="page">
+            <h2 class="title-font anim-slide-down" style="padding: 25px 0 0 0;font-size: 32px;">Adab-Adab Walimah</h2>
+            <div class="adab-grid">
+                <div class="adab-item anim-zoom-in d-1">
+                    <img src="assets/asset-wedding/logo-makan.svg" alt="Adab Makan Icon" style="object-fit: contain;">
+                </div>
+                <div class="adab-item anim-zoom-in d-2">
+                    <img src="assets/asset-wedding/logo-larangan-merokok.svg" alt="Adab Merokok Icon"
+                        style="object-fit: contain;">
+                </div>
+                <div class="adab-item anim-zoom-in d-3">
+                    <img src="assets/asset-wedding/logo-doa.svg" alt="Adab Mendoakan Icon" style="object-fit: contain;">
+                </div>
+                <div class="adab-item anim-zoom-in d-4">
+                    <img src="assets/asset-wedding/logo-shalat.svg" alt="Adab Sholat Icon" style="object-fit: contain;">
+                </div>
+                <div class="adab-item anim-zoom-in d-5">
+                    <img src="assets/asset-wedding/logo-pakaian.svg" alt="Adab Pakaian Icon"
+                        style="object-fit: contain;">
+                </div>
+            </div>
+        </section>
+
+        <section id="page-thanks" class="page">
+            <div class="anim-slide-down" style="display: flex; flex-direction: column; align-items: center;">
+                <p style="font-size: 13px; line-height: 1.6;">Merupakan suatu kebahagiaan dan kehormatan bagi kami,
+                    apabila Bapak/Ibu/Saudara/i, berkenan hadir dan memberikan do'a terbaik kepada kedua mempelai.</p>
+                <p class="italic-text" style="font-size: 13px; margin-top: 30px;">Hormat Kami Yang Mengundang</p>
+                <h2 class="title-font" style="font-size: 32px; margin-top: 10px;">Iqbal & Mega</h2>
+                <p style="font-size: 10px; margin-top: 50px;">Music:<br>Nasyid Wedding Syari</p>
+            </div>
+        </section>
+
+        <nav class="bottom-nav" id="bottomNav">
+            <button class="nav-item active" onclick="switchPage('page-opening', this)">
+                <span class="nav-icon">🏠</span> Opening
+            </button>
+            <button class="nav-item" onclick="switchPage('page-quotes', this)">
+                <span class="nav-icon">📄</span> Quotes
+            </button>
+            <button class="nav-item" onclick="switchPage('page-salam', this)">
+                <span class="nav-icon">✉</span> Salam
+            </button>
+            <button class="nav-item" onclick="switchPage('page-mempelai', this)">
+                <span class="nav-icon">♥</span> Mempelai
+            </button>
+            <button class="nav-item" onclick="switchPage('page-acara', this)">
+                <span class="nav-icon">📅</span> Acara
+            </button>
+            <button class="nav-item" onclick="switchPage('page-maps', this)">
+                <span class="nav-icon">📍</span> Maps
+            </button>
+            <button class="nav-item" onclick="switchPage('page-rsvp', this)">
+                <span class="nav-icon">💬</span> RSVP
+            </button>
+            <button class="nav-item" onclick="switchPage('page-gift', this)">
+                <span class="nav-icon">🎁</span> Gift
+            </button>
+            <button class="nav-item" onclick="switchPage('page-adab', this)">
+                <span class="nav-icon">🛡</span> Adab
+            </button>
+            <button class="nav-item" onclick="switchPage('page-thanks', this)">
+                <span class="nav-icon">✔</span> Thanks
+            </button>
+        </nav>
+
+    </div>
+
+    <script>
+    // --- URL WEB APP GOOGLE SHEETS KAMU ---
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8R75qjEkU4KzuCMMU1ttRKxQJ8FAPGH93pb1BHiZ3bxK-JVYDGhyKRWVbdh8WU7Qp/exec";
+
+    // VARIABEL AUDIO & SLIDER
+    const bgMusic = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    const autoSlideBtn = document.getElementById("autoSlideBtn");
+    let isMusicPlaying = false;
+    let isAutoSliding = false;
+    let autoSlideInterval;
+    let currentPageIndex = 0;
+
+    const pagesList = [
+        'page-opening', 'page-quotes', 'page-salam', 'page-mempelai',
+        'page-acara', 'page-maps', 'page-rsvp', 'page-gift', 'page-adab', 'page-thanks'
+    ];
+
+    window.addEventListener('load', function () {
+        const loader = document.getElementById('loader');
+        
+        // --- LOGIKA MENGAMBIL NAMA TAMU DARI URL ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const tamu = urlParams.get('to'); // Mengambil nilai setelah ?to=
+        
+        if (tamu) {
+            // Jika ada parameter ?to=, ganti teks di halaman opening
+            document.getElementById('namaTamu').innerText = tamu;
+            
+            // Opsional: Isi otomatis kolom nama di form RSVP
+            const rsvpNamaInput = document.getElementById('rsvpNama');
+            if (rsvpNamaInput) {
+                rsvpNamaInput.value = tamu;
+            }
+        }
+        // ---------------------------------------------
+
+        setTimeout(function () {
+            loader.style.opacity = '0';
+            setTimeout(function () {
+                loader.style.display = 'none';
+                document.getElementById('page-opening').classList.add('active');
+                document.querySelector('.app-container').classList.add('start-anim');
+            }, 500);
+        }, 1500);
+    });
+
+    function switchPage(pageId, navElement, fromAutoSlide = false) {
+        const pages = document.querySelectorAll('.page');
+        const appContainer = document.querySelector('.app-container');
+
+        pages.forEach(page => page.classList.remove('active'));
+        appContainer.classList.remove('start-anim');
+
+        setTimeout(() => {
+            document.getElementById(pageId).classList.add('active');
+            appContainer.classList.add('start-anim');
+        }, 10);
+
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => item.classList.remove('active'));
+
+        if (navElement) {
+            navElement.classList.add('active');
+            navElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+
+        currentPageIndex = pagesList.indexOf(pageId);
+        if (!fromAutoSlide && isAutoSliding) {
+            startAutoSlideTimer();
+        }
+    }
+
+    function openInvitation() {
+        document.body.classList.add('invitation-opened');
+        if (bgMusic) {
+            bgMusic.play().then(() => {
+                isMusicPlaying = true;
+                musicBtn.classList.add('music-spin');
+            }).catch((error) => console.log("Audio diblokir browser"));
+        }
+        const quotesNavElement = document.querySelectorAll('.nav-item')[1];
+        switchPage('page-quotes', quotesNavElement);
+    }
+
+    function toggleMusic() {
+        if (!bgMusic) return;
+        if (isMusicPlaying) {
+            bgMusic.pause();
+            musicBtn.classList.remove('music-spin');
+            isMusicPlaying = false;
+        } else {
+            bgMusic.play().then(() => {
+                musicBtn.classList.add('music-spin');
+                isMusicPlaying = true;
+            });
+        }
+    }
+
+    function toggleAutoSlide() {
+        isAutoSliding = !isAutoSliding;
+        if (isAutoSliding) {
+            autoSlideBtn.innerHTML = "⏸";
+            startAutoSlideTimer();
+        } else {
+            autoSlideBtn.innerHTML = "▶";
+            clearInterval(autoSlideInterval);
+        }
+    }
+
+    function startAutoSlideTimer() {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(() => {
+            currentPageIndex++;
+            if (currentPageIndex >= pagesList.length) { currentPageIndex = 1; }
+            const nextPageId = pagesList[currentPageIndex];
+            const targetNavElement = document.querySelectorAll('.nav-item')[currentPageIndex];
+            switchPage(nextPageId, targetNavElement, true);
+        }, 6000);
+    }
+
+    // --- FUNGSI RSVP & DATABASE ---
+    function openRSVP() {
+        document.getElementById('rsvpModal').style.display = 'flex';
+        ambilDataRSVP(); // Tarik data saat modal dibuka
+    }
+    function closeRSVP() {
+        document.getElementById('rsvpModal').style.display = 'none';
+    }
+
+    function kirimRSVP(event) {
+        event.preventDefault(); // Cegah reload halaman
+
+        const btnSubmit = document.getElementById("btnSubmitRSVP");
+        btnSubmit.innerHTML = "Mengirim...";
+        btnSubmit.disabled = true;
+
+        const formData = new URLSearchParams();
+        formData.append('nama', document.getElementById('rsvpNama').value);
+        formData.append('kehadiran', document.getElementById('rsvpHadir').value);
+        formData.append('ucapan', document.getElementById('rsvpUcapan').value);
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                document.getElementById('rsvpForm').reset();
+                btnSubmit.innerHTML = "Kirim";
+                btnSubmit.disabled = false;
+                ambilDataRSVP(); // Perbarui daftar pesan
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                btnSubmit.innerHTML = "Kirim";
+                btnSubmit.disabled = false;
+            });
+    }
+
+    // --- MENGGUNAKAN WARNA AVATAR ACAK ---
+    const colors = ["#FF5733", "#33FF57", "#3357FF", "#F333FF", "#FF33A1", "#33FFF3"];
+
+    function ambilDataRSVP() {
+        const feed = document.getElementById('rsvpFeed');
+
+        fetch(SCRIPT_URL)
+            .then(res => res.json())
+            .then(data => {
+                feed.innerHTML = "";
+
+                if (data.length === 0) {
+                    feed.innerHTML = "<p style='font-size: 12px; text-align: center; color: #888;'>Belum ada ucapan. Jadilah yang pertama!</p>";
+                    return;
+                }
+
+                data.forEach((item, index) => {
+                    let inisial = item.nama.substring(0, 2).toUpperCase();
+                    let badgeClass = item.kehadiran === "Hadir" ? "badge-hadir" : "badge-absen";
+                    let tgl = new Date(item.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+                    let jam = new Date(item.tanggal).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+                    // Pilih warna secara acak berdasarkan index
+                    let randomColor = colors[index % colors.length];
+
+                    let html = `
+                        <div class="msg-item">
+                            <div class="msg-avatar" style="background-color: ${randomColor};">${inisial}</div>
+                            <div class="msg-body">
+                                <div class="msg-header">
+                                    <p class="msg-name">${item.nama} <span class="msg-badge ${badgeClass}">${item.kehadiran}</span></p>
+                                </div>
+                                <p class="msg-text">${item.ucapan}</p>
+                                <p class="msg-time">${tgl} at ${jam}</p>
+                            </div>
+                        </div>`;
+                    feed.innerHTML += html;
+                });
+            })
+            .catch(err => {
+                feed.innerHTML = "<p style='font-size: 12px; text-align: center; color: red;'>Gagal memuat pesan. Pastikan Link Apps Script sudah di-deploy dengan benar.</p>";
+            });
+    }
+
+    // --- FUNGSI GIFT CASHLESS ---
+    function toggleGift() {
+        const giftDiv = document.getElementById('giftDetails');
+        if (giftDiv.style.display === 'none') {
+            giftDiv.style.display = 'block';
+            giftDiv.classList.add('anim-slide-up');
+        } else {
+            giftDiv.style.display = 'none';
+            giftDiv.classList.remove('anim-slide-up');
+        }
+    }
+
+    function copyRekening(elementId) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Nomor rekening " + text + " berhasil disalin!");
+        });
+    }
+
+    // --- TIMER ---
+    const countDownDate = new Date("Mar 29, 2026 08:00:00").getTime();
+    const hitungMundur = setInterval(function () {
+        const now = new Date().getTime();
+        const distance = countDownDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        if (document.getElementById("hari")) {
+            document.getElementById("hari").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("jam").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("menit").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("detik").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+        }
+        if (distance < 0) {
+            clearInterval(hitungMundur);
+        }
+    }, 1000);
+</script>
+    </script>
+</body>
+
+</html>
